@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Formulario de Evento</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f7f7f7;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+        }
+        .form-container {
+            background-color: #ffffff;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            width: 100%;
+            max-width: 400px;
+        }
+        .form-container h2 {
+            text-align: center;
+            margin-bottom: 20px;
+        }
+        .form-group {
+            margin-bottom: 15px;
+        }
+        label {
+            display: block;
+            margin-bottom: 5px;
+        }
+        input[type="text"], input[type="email"], input[type="date"], input[type="time"], select {
+            width: 100%;
+            padding: 10px;
+            margin-top: 5px;
+            border-radius: 4px;
+            border: 1px solid #ccc;
+        }
+        input[type="submit"] {
+            width: 100%;
+            padding: 10px;
+            background-color: #28a745;
+            color: white;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            font-size: 16px;
+        }
+        input[type="submit"]:hover {
+            background-color: #218838;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="form-container">
+        <h2>Formulario de Evento</h2>
+        <form id="eventForm">
+            <div class="form-group">
+                <label for="name">Nombre y Apellido:</label>
+                <input type="text" id="name" name="name" required>
+            </div>
+            <div class="form-group">
+                <label for="city">Ciudad del Evento:</label>
+                <input type="text" id="city" name="city" required>
+            </div>
+            <div class="form-group">
+                <label for="budget">Presupuesto (solo para Asunción o alrededores):</label>
+                <select id="budget" name="budget" required>
+                    <option value="">Seleccione una opción</option>
+                    <option value="380.000 - 450.000">380.000 a 450.000</option>
+                    <option value="450.000 - 550.000">450.000 a 550.000</option>
+                    <option value="550.000 - 650.000">550.000 a 650.000</option>
+                </select>
+            </div>
+            <div class="form-group">
+                <label for="date">Fecha del Evento:</label>
+                <input type="date" id="date" name="date" required>
+            </div>
+            <div class="form-group">
+                <label for="time">Hora del Evento:</label>
+                <input type="time" id="time" name="time" required>
+            </div>
+            <div class="form-group">
+                <label for="phone">Número de Teléfono:</label>
+                <input type="text" id="phone" name="phone" required>
+            </div>
+            <div class="form-group">
+                <label for="email">Email (opcional):</label>
+                <input type="email" id="email" name="email">
+            </div>
+            <input type="submit" value="Enviar a WhatsApp">
+        </form>
+    </div>
+
+    <script>
+        document.getElementById('eventForm').addEventListener('submit', function(e) {
+            e.preventDefault();
+
+            // Obtener los valores del formulario
+            const name = document.getElementById('name').value;
+            const city = document.getElementById('city').value;
+            const budget = document.getElementById('budget').value;
+            const date = document.getElementById('date').value;
+            const time = document.getElementById('time').value;
+            const phone = document.getElementById('phone').value;
+            const email = document.getElementById('email').value;
+
+            // Generar el mensaje para WhatsApp
+            let message = `*Nombre y Apellido:* ${name}%0A*Ciudad del Evento:* ${city}%0A*Presupuesto:* ${budget}%0A*Fecha del Evento:* ${date}%0A*Hora del Evento:* ${time}%0A*Teléfono:* ${phone}`;
+            if (email) {
+                message += `%0A*Email:* ${email}`;
+            }
+
+            // Enviar a WhatsApp
+            const whatsappURL = `https://wa.me/595961871700?text=${message}`;
+            window.open(whatsappURL, '_blank');
+        });
+    </script>
+
+</body>
+</html>
